@@ -9,7 +9,7 @@
 
 do $$
 declare
-   v_user_id uuid := '7e2e1c17-8d90-47b4-891c-fba0f5296afa'; -- <-- replace with your auth.users.id
+  v_user_id uuid := 'YOUR_USER_ID_HERE'; -- <-- replace with your auth.users.id
   v_proj_optima uuid;
   v_proj_billing uuid;
   v_proj_meiwork uuid;
