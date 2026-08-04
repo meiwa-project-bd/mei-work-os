@@ -8,29 +8,34 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden w-64 shrink-0 flex-col border-r border-white/70 bg-white/72 shadow-xl shadow-pink-100/50 backdrop-blur-xl md:flex">
-      <div className="px-6 py-5">
+    <aside className="hidden w-64 shrink-0 flex-col bg-[#081f4d] text-white shadow-2xl shadow-slate-900/20 md:flex">
+      <div className="px-6 py-6">
         <div className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-sm font-black text-white shadow-lg shadow-pink-300/40">
-            M
+          <span className="grid h-12 w-12 place-items-center rounded-lg bg-gradient-to-br from-[#2f7bff] to-[#e11d74] text-base font-black shadow-lg shadow-blue-950/40">
+            MEI
           </span>
           <div>
-            <span className="text-lg font-bold tracking-tight text-primary">MEI Work OS</span>
-            <p className="text-xs text-muted">Lovely work tracker</p>
+            <span className="text-xl font-black tracking-tight">MEI Work OS</span>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-blue-200/75">
+              Level up workday
+            </p>
           </div>
         </div>
       </div>
-      <nav className="flex-1 space-y-1 px-3">
+
+      <div className="mx-5 h-px bg-white/12" />
+
+      <nav className="flex-1 space-y-2 px-4 py-6">
         {NAV_ITEMS.map((item) => {
           const active = pathname === item.href || pathname?.startsWith(`${item.href}/`);
           return (
             <Link
               key={item.href}
               href={item.href}
-              className={`block rounded-lg px-3 py-2.5 text-sm font-semibold transition-all ${
+              className={`flex items-center rounded-lg px-4 py-3 text-sm font-bold transition-all ${
                 active
-                  ? "bg-primary text-primary-foreground shadow-md shadow-pink-200"
-                  : "text-foreground hover:bg-white hover:text-primary hover:shadow-sm"
+                  ? "bg-gradient-to-r from-[#1f6bff] to-[#6b5cff] text-white shadow-lg shadow-blue-950/30"
+                  : "text-blue-100/82 hover:bg-white/9 hover:text-white"
               }`}
             >
               {item.label}
@@ -38,10 +43,13 @@ export function Sidebar() {
           );
         })}
       </nav>
-      <div className="m-3 rounded-lg border border-pink-100 bg-gradient-to-br from-pink-50 to-sky-50 p-3">
-        <p className="text-xs font-semibold text-foreground">โหมดตั้งใจทำงาน</p>
-        <p className="mt-1 text-xs leading-relaxed text-muted">
-          เปิด tracker ไว้ แล้วให้ระบบช่วยเก็บเวลาและหลักฐานงานให้เอง
+
+      <div className="mx-5 mb-5 rounded-lg border border-white/10 bg-white/8 p-4">
+        <p className="text-xs font-black uppercase tracking-[0.16em] text-[#65e6d3]">
+          Focus Mode
+        </p>
+        <p className="mt-2 text-xs leading-relaxed text-blue-100/82">
+          เปิด tracker ไว้ แล้วให้ระบบเก็บเวลาและหลักฐานงานให้แบบอัตโนมัติ
         </p>
       </div>
     </aside>

@@ -37,17 +37,17 @@ function statusLabel(status: string): string {
 function SessionsTable({ sessions }: { sessions: WorkSession[] }) {
   if (sessions.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed border-pink-200 bg-pink-50/70 p-6 text-center">
-        <p className="text-sm font-semibold text-foreground">ยังไม่มี session จาก local tracker</p>
+      <div className="rounded-lg border border-dashed border-border bg-sky-50/60 p-6 text-center">
+        <p className="text-sm font-bold text-foreground">ยังไม่มี session จาก local tracker</p>
         <p className="mt-1 text-xs text-muted">เปิด Windows tracker แล้วข้อมูลจะเข้ามาที่นี่เอง</p>
       </div>
     );
   }
 
   return (
-    <div className="overflow-hidden rounded-lg border border-pink-100 bg-white/80">
-      <table className="min-w-full divide-y divide-pink-100 text-sm">
-        <thead className="bg-pink-50/80 text-left text-xs text-muted">
+    <div className="overflow-hidden rounded-lg border border-border bg-white">
+      <table className="min-w-full divide-y divide-border text-sm">
+        <thead className="bg-slate-50 text-left text-xs text-muted">
           <tr>
             <th className="px-3 py-2 font-bold">งาน</th>
             <th className="px-3 py-2 font-bold">เครื่องมือ</th>
@@ -56,22 +56,22 @@ function SessionsTable({ sessions }: { sessions: WorkSession[] }) {
             <th className="px-3 py-2 font-bold">สถานะ</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-pink-100">
+        <tbody className="divide-y divide-border">
           {sessions.map((session) => (
-            <tr key={session.id} className="transition-colors hover:bg-pink-50/55">
+            <tr key={session.id} className="transition-colors hover:bg-sky-50/60">
               <td className="max-w-[18rem] px-3 py-2">
-                <p className="truncate font-semibold text-foreground">{session.title}</p>
+                <p className="truncate font-bold text-foreground">{session.title}</p>
                 <p className="truncate text-xs text-muted">
                   {session.window_title ?? session.repo_path ?? "-"}
                 </p>
               </td>
               <td className="px-3 py-2 text-muted">{session.tool}</td>
               <td className="px-3 py-2 text-muted">{formatSessionRange(session)}</td>
-              <td className="px-3 py-2 font-semibold text-foreground">
+              <td className="px-3 py-2 font-bold text-foreground">
                 {formatHoursDecimal(session.active_minutes ?? session.duration_minutes ?? 0)}
               </td>
               <td className="px-3 py-2">
-                <span className="rounded-lg bg-primary/10 px-2 py-1 text-xs font-bold text-primary">
+                <span className="rounded-lg bg-primary/10 px-2 py-1 text-xs font-black text-primary">
                   {statusLabel(session.status)}
                 </span>
               </td>
@@ -86,7 +86,7 @@ function SessionsTable({ sessions }: { sessions: WorkSession[] }) {
 function EvidenceList({ items }: { items: EvidenceItem[] }) {
   if (items.length === 0) {
     return (
-      <p className="rounded-lg border border-dashed border-pink-200 bg-pink-50/70 p-5 text-sm text-muted">
+      <p className="rounded-lg border border-dashed border-border bg-sky-50/60 p-5 text-sm text-muted">
         ยังไม่มีหลักฐานที่บันทึกจาก tracker
       </p>
     );
@@ -95,16 +95,16 @@ function EvidenceList({ items }: { items: EvidenceItem[] }) {
   return (
     <div className="space-y-2">
       {items.map((item) => (
-        <div key={item.id} className="rounded-lg border border-pink-100 bg-white/72 p-3">
+        <div key={item.id} className="rounded-lg border border-border bg-white p-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="text-sm font-semibold text-foreground">{item.title}</p>
-            <span className="rounded-lg bg-accent/10 px-2 py-1 text-xs font-bold text-accent">
+            <p className="text-sm font-bold text-foreground">{item.title}</p>
+            <span className="rounded-lg bg-accent/10 px-2 py-1 text-xs font-black text-accent">
               {item.type}
             </span>
           </div>
           <p className="mt-1 text-xs text-muted">{formatDateTime(item.created_at)}</p>
           {item.url && (
-            <a className="mt-2 block truncate text-xs font-semibold text-primary" href={item.url}>
+            <a className="mt-2 block truncate text-xs font-bold text-primary" href={item.url}>
               {item.url}
             </a>
           )}
@@ -118,7 +118,7 @@ function EvidenceList({ items }: { items: EvidenceItem[] }) {
 function AiEventsList({ events }: { events: AiUsageEvent[] }) {
   if (events.length === 0) {
     return (
-      <p className="rounded-lg border border-dashed border-sky-200 bg-sky-50/70 p-5 text-sm text-muted">
+      <p className="rounded-lg border border-dashed border-border bg-sky-50/60 p-5 text-sm text-muted">
         ยังไม่มี AI usage หรือ limit event
       </p>
     );
@@ -127,12 +127,12 @@ function AiEventsList({ events }: { events: AiUsageEvent[] }) {
   return (
     <div className="space-y-2">
       {events.map((event) => (
-        <div key={event.id} className="rounded-lg border border-sky-100 bg-white/72 p-3">
+        <div key={event.id} className="rounded-lg border border-border bg-white p-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="text-sm font-semibold text-foreground">
+            <p className="text-sm font-bold text-foreground">
               {event.tool} / {event.provider}
             </p>
-            <span className="rounded-lg bg-warning/10 px-2 py-1 text-xs font-bold text-warning">
+            <span className="rounded-lg bg-warning/10 px-2 py-1 text-xs font-black text-warning">
               {event.event_type}
             </span>
           </div>
@@ -159,48 +159,57 @@ export default async function TrackerPage() {
 
   return (
     <div className="space-y-6">
-      <section className="mei-card mei-shine relative overflow-hidden rounded-lg p-5 sm:p-7">
-        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-accent to-success" />
-        <div className="relative z-[1] grid gap-6 lg:grid-cols-[1fr_18rem] lg:items-center">
+      <section className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-[#08265d] via-[#1558b7] to-[#6b5cff] p-6 shadow-2xl shadow-blue-200/60 sm:p-8">
+        <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(90deg,#fff_1px,transparent_1px),linear-gradient(180deg,#fff_1px,transparent_1px)] [background-size:42px_42px]" />
+        <div className="absolute -right-16 -top-24 h-72 w-72 rounded-full bg-[#ff5aa5]/22 blur-3xl" />
+
+        <div className="relative z-[1] grid gap-7 lg:grid-cols-[1fr_23rem] lg:items-center">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">
-              หลักฐานงาน
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-[#65e6d3]">
+              Evidence Vault
             </p>
-            <h1 className="mt-2 text-3xl font-black tracking-tight text-foreground sm:text-4xl">
-              วันนี้ระบบช่วยเก็บเวลาทำงานให้แล้ว
+            <h1 className="mt-4 max-w-3xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">
+              หลักฐานงานวันนี้ พร้อมให้ตรวจแล้ว
             </h1>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
-              เปิด tracker ไว้ แล้วกลับมาดูภาพรวมว่าทำอะไรไปบ้าง ใช้เครื่องมือไหน และมีหลักฐานอะไรเกิดขึ้นระหว่างวัน
+            <p className="mt-4 max-w-2xl text-base font-medium leading-7 text-blue-50/88">
+              Tracker เก็บเวลา เครื่องมือ และ session ให้เอง เหลือแค่เปิดไว้แล้วทำงานต่อได้เลย
             </p>
-            <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold">
-              <span className="rounded-lg bg-pink-100 px-3 py-1.5 text-primary">
-                {data.activeSessions.length} session กำลังทำงาน
+            <div className="mt-6 flex flex-wrap gap-3 text-xs font-black">
+              <span className="rounded-lg bg-white/12 px-3 py-2 text-white">
+                {data.activeSessions.length} session active
               </span>
-              <span className="rounded-lg bg-teal-100 px-3 py-1.5 text-success">
+              <span className="rounded-lg bg-[#65e6d3]/18 px-3 py-2 text-[#b8fff4]">
                 {formatHoursDecimal(activeMinutes)} active วันนี้
               </span>
-              <span className="rounded-lg bg-sky-100 px-3 py-1.5 text-accent">
+              <span className="rounded-lg bg-[#ff5aa5]/18 px-3 py-2 text-pink-100">
                 {data.summary.evidenceCount} หลักฐานวันนี้
               </span>
             </div>
           </div>
-          <div className="flex items-center justify-between gap-4 rounded-lg border border-pink-100 bg-pink-50/70 p-4">
-            <div>
+
+          <div className="rounded-[22px] border border-white/16 bg-[#142f78]/78 p-5 text-white shadow-xl backdrop-blur">
+            <div className="flex items-center justify-between gap-4">
               <div
                 className="grid h-28 w-28 place-items-center rounded-full"
                 style={{
-                  background: `conic-gradient(var(--primary) ${progress}%, rgba(243, 215, 229, 0.9) 0)`,
+                  background: `conic-gradient(#65e6d3 ${progress}%, rgba(255,255,255,.18) 0)`,
                 }}
               >
-                <div className="grid h-20 w-20 place-items-center rounded-full bg-white shadow-inner">
+                <div className="grid h-20 w-20 place-items-center rounded-full bg-[#1f3b8d]">
                   <div className="text-center">
-                    <p className="text-2xl font-black text-foreground">{progress}%</p>
-                    <p className="text-[10px] font-semibold text-muted">focus</p>
+                    <p className="text-2xl font-black">{progress}%</p>
+                    <p className="text-[10px] font-black uppercase tracking-wide text-blue-100/70">
+                      focus
+                    </p>
                   </div>
                 </div>
               </div>
+              <MeiMascot compact message="เก็บหลักฐานให้แล้ว" />
             </div>
-            <MeiMascot compact message="ดีมาก เก็บหลักฐานงานไว้ให้แล้วนะ" />
+            <p className="mt-4 text-sm font-black">Focus progress</p>
+            <p className="mt-1 text-xs leading-relaxed text-blue-100/78">
+              คิดจากเป้าหมายโฟกัส 4 ชั่วโมงต่อวัน
+            </p>
           </div>
         </div>
       </section>
@@ -234,8 +243,8 @@ export default async function TrackerPage() {
 
       <section className="mei-card rounded-lg p-4 sm:p-5">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-          <h2 className="text-sm font-bold text-foreground">Session ที่กำลังทำงาน</h2>
-          <span className="rounded-lg bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary">
+          <h2 className="text-sm font-black text-foreground">Session ที่กำลังทำงาน</h2>
+          <span className="rounded-lg bg-primary/10 px-2.5 py-1 text-xs font-black text-primary">
             {data.activeSessions.length} active
           </span>
         </div>
@@ -245,30 +254,30 @@ export default async function TrackerPage() {
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1.2fr_0.8fr]">
         <section className="mei-card rounded-lg p-4 sm:p-5">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-            <h2 className="text-sm font-bold text-foreground">Session ล่าสุด</h2>
-            <span className="text-xs font-semibold text-muted">{data.todaySessions.length} วันนี้</span>
+            <h2 className="text-sm font-black text-foreground">Session ล่าสุด</h2>
+            <span className="text-xs font-bold text-muted">{data.todaySessions.length} วันนี้</span>
           </div>
           <SessionsTable sessions={data.recentSessions} />
         </section>
 
         <section className="mei-card rounded-lg p-4 sm:p-5">
-          <h2 className="mb-4 text-sm font-bold text-foreground">เวลาตามเครื่องมือ</h2>
+          <h2 className="mb-4 text-sm font-black text-foreground">เวลาตามเครื่องมือ</h2>
           <div className="space-y-2">
             {data.summary.topTools.length === 0 ? (
-              <p className="rounded-lg border border-dashed border-pink-200 bg-pink-50/70 p-5 text-sm text-muted">
+              <p className="rounded-lg border border-dashed border-border bg-sky-50/60 p-5 text-sm text-muted">
                 ยังไม่มีข้อมูลเครื่องมือวันนี้
               </p>
             ) : (
               data.summary.topTools.map((item) => {
                 const width = Math.max(8, Math.min(100, (item.minutes / Math.max(1, activeMinutes)) * 100));
                 return (
-                  <div key={item.tool} className="rounded-lg border border-pink-100 bg-white/72 p-3">
+                  <div key={item.tool} className="rounded-lg border border-border bg-white p-3">
                     <div className="flex items-center justify-between gap-3 text-sm">
-                      <span className="font-semibold text-foreground">{item.tool}</span>
+                      <span className="font-bold text-foreground">{item.tool}</span>
                       <span className="text-muted">{formatHoursDecimal(item.minutes)}</span>
                     </div>
-                    <div className="mt-2 h-2 overflow-hidden rounded-full bg-pink-50">
-                      <div className="h-2 rounded-full bg-primary" style={{ width: `${width}%` }} />
+                    <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-100">
+                      <div className="h-2 rounded-full bg-accent" style={{ width: `${width}%` }} />
                     </div>
                   </div>
                 );
@@ -280,12 +289,12 @@ export default async function TrackerPage() {
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <section className="mei-card rounded-lg p-4 sm:p-5">
-          <h2 className="mb-4 text-sm font-bold text-foreground">หลักฐานล่าสุด</h2>
+          <h2 className="mb-4 text-sm font-black text-foreground">หลักฐานล่าสุด</h2>
           <EvidenceList items={data.recentEvidence} />
         </section>
 
         <section className="mei-card rounded-lg p-4 sm:p-5">
-          <h2 className="mb-4 text-sm font-bold text-foreground">AI usage / limit events</h2>
+          <h2 className="mb-4 text-sm font-black text-foreground">AI usage / limit events</h2>
           <AiEventsList events={data.recentAiEvents} />
         </section>
       </div>
