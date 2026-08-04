@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { ConfigNotice } from "@/components/ui/ConfigNotice";
+import { MeiMascot } from "@/components/ui/MeiMascot";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Topbar } from "@/components/layout/Topbar";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
@@ -24,11 +25,16 @@ export default async function AppLayout({
   }
 
   return (
-    <div className="flex min-h-svh w-full bg-background">
+    <div className="mei-shell flex min-h-svh w-full bg-background">
       <Sidebar />
-      <div className="flex flex-1 flex-col">
+      <div className="flex min-w-0 flex-1 flex-col">
         <Topbar userEmail={user.email ?? ""} />
-        <main className="flex-1 p-4 md:p-6">{children}</main>
+        <main className="relative flex-1 p-4 pb-24 md:p-6 lg:p-8">
+          {children}
+          <div className="fixed bottom-5 right-5 z-20 hidden lg:block">
+            <MeiMascot compact />
+          </div>
+        </main>
       </div>
     </div>
   );

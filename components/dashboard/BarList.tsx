@@ -36,15 +36,15 @@ export function BarList({
             return (
               <div key={item.label}>
                 <div className="mb-1 flex items-baseline justify-between gap-2 text-xs">
-                  <span className="truncate font-medium text-foreground">{item.label}</span>
+                  <span className="truncate font-semibold text-foreground">{item.label}</span>
                   <span className="shrink-0 text-muted">
                     {formatValue ? formatValue(item.value) : item.value}
-                    {showPercentage && total > 0 ? ` · ${pct}%` : ""}
+                    {showPercentage && total > 0 ? ` - ${pct}%` : ""}
                   </span>
                 </div>
-                <div className="h-2 overflow-hidden rounded-full bg-background">
+                <div className="h-2 overflow-hidden rounded-full bg-pink-50">
                   <div
-                    className={`h-2 rounded-r-full ${barClass}`}
+                    className={`h-2 rounded-full ${barClass}`}
                     style={{ width: `${Math.max(4, (item.value / max) * 100)}%` }}
                   />
                 </div>

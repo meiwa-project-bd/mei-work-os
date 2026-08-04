@@ -1,17 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f6f8;
-  --surface: #ffffff;
-  --foreground: #27272a;
-  --muted: #6b7280;
-  --border: #e5e7eb;
-  --primary: #1e3a5f;
+  --background: #fff6fb;
+  --surface: #fffafd;
+  --foreground: #332534;
+  --muted: #7f6879;
+  --border: #f3d7e5;
+  --primary: #db2777;
   --primary-foreground: #ffffff;
-  --accent: #6d28d9;
-  --success: #16a34a;
-  --warning: #d97706;
-  --danger: #dc2626;
+  --accent: #5b6ee1;
+  --success: #0f9f8f;
+  --warning: #d18b0b;
+  --danger: #d92d62;
+  --rose-soft: #ffe3ef;
+  --mint-soft: #dcfaf3;
+  --sun-soft: #fff1c9;
+  --sky-soft: #e6f0ff;
 }
 
 @theme inline {
@@ -31,6 +35,108 @@
 }
 
 body {
-  background: var(--background);
+  min-height: 100vh;
+  background:
+    linear-gradient(135deg, rgba(255, 235, 246, 0.95), rgba(248, 250, 255, 0.92) 45%, rgba(236, 255, 249, 0.76)),
+    var(--background);
   color: var(--foreground);
+}
+
+::selection {
+  background: rgba(219, 39, 119, 0.18);
+  color: var(--foreground);
+}
+
+.mei-shell {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.56) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.48) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.mei-card {
+  border: 1px solid rgba(243, 215, 229, 0.9);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 250, 253, 0.96)),
+    var(--surface);
+  box-shadow: 0 14px 36px rgba(181, 89, 133, 0.08);
+}
+
+.mei-card-hover {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.mei-card-hover:hover {
+  border-color: rgba(219, 39, 119, 0.28);
+  box-shadow: 0 18px 42px rgba(181, 89, 133, 0.14);
+  transform: translateY(-2px);
+}
+
+.mei-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.mei-shine::after {
+  animation: mei-shimmer 5.5s ease-in-out infinite;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.42), transparent);
+  content: "";
+  inset: 0;
+  position: absolute;
+  transform: translateX(-120%);
+}
+
+.mei-float {
+  animation: mei-float 3.4s ease-in-out infinite;
+}
+
+.mei-pulse {
+  animation: mei-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes mei-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes mei-pulse {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes mei-shimmer {
+  0%,
+  44% {
+    transform: translateX(-120%);
+  }
+  68%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

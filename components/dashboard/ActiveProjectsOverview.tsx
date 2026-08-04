@@ -21,8 +21,8 @@ function Stat({
 }) {
   return (
     <div>
-      <p className="text-[11px] uppercase tracking-wide text-muted">{label}</p>
-      <p className={`mt-0.5 text-sm font-semibold ${warn ? "text-warning" : "text-foreground"}`}>
+      <p className="text-[11px] font-semibold uppercase tracking-wide text-muted">{label}</p>
+      <p className={`mt-0.5 text-sm font-bold ${warn ? "text-warning" : "text-foreground"}`}>
         {value}
       </p>
     </div>
@@ -33,10 +33,10 @@ export function ActiveProjectsOverview({ projects }: { projects: ProjectOverview
   return (
     <SectionCard
       icon={FolderIcon}
-      title="โปรเจกต์ที่กำลังดำเนินการ"
+      title="โปรเจกต์ที่กำลังเดิน"
       tone="primary"
       action={
-        <a href="/projects" className="text-xs font-medium text-primary hover:underline">
+        <a href="/projects" className="text-xs font-bold text-primary hover:underline">
           ดูทั้งหมด
         </a>
       }
@@ -51,9 +51,9 @@ export function ActiveProjectsOverview({ projects }: { projects: ProjectOverview
           {projects.map((project) => (
             <div
               key={project.id}
-              className="rounded-xl border border-border bg-background/60 p-3.5 transition-colors hover:bg-background"
+              className="rounded-lg border border-pink-100 bg-white/70 p-3.5 transition-colors hover:bg-pink-50/70"
             >
-              <p className="truncate text-sm font-semibold text-foreground">{project.name}</p>
+              <p className="truncate text-sm font-bold text-foreground">{project.name}</p>
               <div className="mt-1.5 flex flex-wrap gap-1.5">
                 <Badge className={PROJECT_STATUS_BADGE[project.status]}>
                   {PROJECT_STATUS_LABEL_TH[project.status]}
@@ -62,7 +62,7 @@ export function ActiveProjectsOverview({ projects }: { projects: ProjectOverview
                   {PRIORITY_LABEL_TH[project.priority]}
                 </Badge>
               </div>
-              <div className="mt-3 grid grid-cols-2 gap-3 border-t border-border pt-3">
+              <div className="mt-3 grid grid-cols-2 gap-3 border-t border-pink-100 pt-3">
                 <Stat label="ชั่วโมงรวม" value={project.totalHoursLabel} />
                 <Stat label="งานทั้งหมด" value={project.totalLogs} />
                 <Stat

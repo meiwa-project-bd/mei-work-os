@@ -93,7 +93,6 @@ export const RELATIONSHIP_TYPES = [
 ] as const;
 export type RelationshipType = (typeof RELATIONSHIP_TYPES)[number];
 
-/** Tailwind class fragments for status badges, per the design spec. */
 export const WORK_LOG_STATUS_BADGE: Record<WorkLogStatus, string> = {
   Done: "bg-success/10 text-success",
   "In Progress": "bg-primary/10 text-primary",
@@ -118,8 +117,6 @@ export const PRIORITY_BADGE: Record<ProjectPriority, string> = {
   Critical: "bg-danger/10 text-danger",
 };
 
-/** Thai display labels for status/priority. The English values above remain the
- *  stored DB/enum values and query-filter values — these are for display only. */
 export const WORK_LOG_STATUS_LABEL_TH: Record<WorkLogStatus, string> = {
   Planned: "วางแผนไว้",
   "In Progress": "กำลังดำเนินการ",
@@ -164,11 +161,11 @@ export const QUICK_TEMPLATES: QuickTemplate[] = [
 ];
 
 export const NAV_ITEMS = [
-  { href: "/dashboard", label: "Dashboard" },
-  { href: "/work-logs", label: "Work Logs" },
-  { href: "/projects", label: "Projects" },
-  { href: "/reports", label: "Reports" },
+  { href: "/dashboard", label: "แดชบอร์ด" },
+  { href: "/work-logs", label: "บันทึกงาน" },
+  { href: "/projects", label: "โปรเจกต์" },
+  { href: "/reports", label: "รายงาน" },
   { href: "/tracker", label: "หลักฐานงาน" },
-  { href: "/people", label: "People" },
-  { href: "/settings", label: "Settings" },
+  { href: "/people", label: "ผู้เกี่ยวข้อง" },
+  { href: "/settings", label: "ตั้งค่า" },
 ] as const;
