@@ -35,7 +35,7 @@ export function TodayWorkList({ logs }: { logs: WeekLogRow[] }) {
             return (
               <div
                 key={log.id}
-                className="rounded-lg border border-pink-100 bg-white/70 p-3 transition-colors hover:bg-pink-50/70"
+                className="rounded-lg border border-border bg-background/60 p-3 transition-colors hover:bg-background"
               >
                 <div className="flex items-start justify-between gap-2">
                   <p className="text-sm font-semibold text-foreground">{log.title}</p>

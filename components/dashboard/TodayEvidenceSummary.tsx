@@ -9,20 +9,20 @@ export function TodayEvidenceSummary({ summary }: { summary: TrackerDashboardSum
     <SectionCard icon={ClockIcon} title="หลักฐานการทำงานวันนี้" tone="accent">
       <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="grid grid-cols-3 gap-2">
-          <div className="rounded-lg border border-pink-100 bg-pink-50/70 p-3">
-            <p className="text-lg font-black text-foreground">
+          <div className="rounded-lg border border-border bg-background/60 p-3">
+            <p className="text-lg font-bold text-foreground">
               {formatHoursDecimal(summary.trackedMinutes)}
             </p>
             <p className="mt-1 text-[11px] font-medium text-muted">เวลาที่ track</p>
           </div>
-          <div className="rounded-lg border border-teal-100 bg-teal-50/70 p-3">
-            <p className="text-lg font-black text-foreground">
+          <div className="rounded-lg border border-border bg-background/60 p-3">
+            <p className="text-lg font-bold text-foreground">
               {formatHoursDecimal(summary.activeMinutes)}
             </p>
             <p className="mt-1 text-[11px] font-medium text-muted">เวลาทำงานจริง</p>
           </div>
-          <div className="rounded-lg border border-sky-100 bg-sky-50/70 p-3">
-            <p className="text-lg font-black text-foreground">{summary.evidenceCount}</p>
+          <div className="rounded-lg border border-border bg-background/60 p-3">
+            <p className="text-lg font-bold text-foreground">{summary.evidenceCount}</p>
             <p className="mt-1 text-[11px] font-medium text-muted">หลักฐาน</p>
           </div>
         </div>

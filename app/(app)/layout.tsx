@@ -24,7 +24,7 @@ export default async function AppLayout({
   }
 
   return (
-    <div className="mei-shell flex min-h-svh w-full bg-background">
+    <div className="flex min-h-svh w-full bg-background">
       <Sidebar />
       <div className="flex min-w-0 flex-1 flex-col">
         <Topbar userEmail={user.email ?? ""} />

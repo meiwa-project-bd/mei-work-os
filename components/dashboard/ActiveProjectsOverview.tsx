@@ -51,7 +51,7 @@ export function ActiveProjectsOverview({ projects }: { projects: ProjectOverview
           {projects.map((project) => (
             <div
               key={project.id}
-              className="rounded-lg border border-pink-100 bg-white/70 p-3.5 transition-colors hover:bg-pink-50/70"
+              className="rounded-lg border border-border bg-background/60 p-3.5 transition-colors hover:bg-background"
             >
               <p className="truncate text-sm font-bold text-foreground">{project.name}</p>
               <div className="mt-1.5 flex flex-wrap gap-1.5">
@@ -62,7 +62,7 @@ export function ActiveProjectsOverview({ projects }: { projects: ProjectOverview
                   {PRIORITY_LABEL_TH[project.priority]}
                 </Badge>
               </div>
-              <div className="mt-3 grid grid-cols-2 gap-3 border-t border-pink-100 pt-3">
+              <div className="mt-3 grid grid-cols-2 gap-3 border-t border-border pt-3">
                 <Stat label="ชั่วโมงรวม" value={project.totalHoursLabel} />
                 <Stat label="งานทั้งหมด" value={project.totalLogs} />
                 <Stat

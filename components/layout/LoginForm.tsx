@@ -48,7 +48,7 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={pending}
-        className="mei-card-hover w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-primary-foreground shadow-md shadow-pink-200 disabled:opacity-60"
+        className="w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-60"
       >
         {pending ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
       </button>
