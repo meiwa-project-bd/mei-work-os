@@ -22,14 +22,12 @@ export function Topbar({ userEmail }: { userEmail: string }) {
           <p className="text-xs text-muted">{userEmail}</p>
         </div>
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            disabled
-            title="เร็วๆ นี้ — Phase 2"
-            className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white opacity-60"
+          <Link
+            href="/work-logs"
+            className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent/90"
           >
-            + Quick Add
-          </button>
+            + บันทึกงานใหม่
+          </Link>
           <form action={logout}>
             <button
               type="submit"

@@ -45,6 +45,45 @@ export const ATTACHMENT_TYPES = [
 ] as const;
 export type AttachmentType = (typeof ATTACHMENT_TYPES)[number];
 
+export const WORK_SESSION_STATUSES = ["active", "paused", "completed", "cancelled"] as const;
+export type WorkSessionStatus = (typeof WORK_SESSION_STATUSES)[number];
+
+export const WORK_SESSION_SOURCES = ["manual", "local_agent", "cli_wrapper"] as const;
+export type WorkSessionSource = (typeof WORK_SESSION_SOURCES)[number];
+
+export const EVIDENCE_TYPES = [
+  "commit",
+  "command",
+  "build",
+  "test",
+  "screenshot",
+  "file",
+  "report",
+  "limit_event",
+  "note",
+  "other",
+] as const;
+export type EvidenceType = (typeof EVIDENCE_TYPES)[number];
+
+export const AI_USAGE_PROVIDERS = ["OpenAI", "Anthropic", "Other"] as const;
+export type AiUsageProvider = (typeof AI_USAGE_PROVIDERS)[number];
+
+export const AI_USAGE_TOOLS = ["ChatGPT", "Codex", "Claude Code", "Other"] as const;
+export type AiUsageTool = (typeof AI_USAGE_TOOLS)[number];
+
+export const AI_USAGE_EVENT_TYPES = [
+  "model_detected",
+  "limit_warning",
+  "limit_reached",
+  "reset_time_detected",
+  "usage_snapshot",
+  "other",
+] as const;
+export type AiUsageEventType = (typeof AI_USAGE_EVENT_TYPES)[number];
+
+export const AI_USAGE_SOURCES = ["cli_output", "manual", "api", "local_agent"] as const;
+export type AiUsageSource = (typeof AI_USAGE_SOURCES)[number];
+
 export const RELATIONSHIP_TYPES = [
   "waiting_for",
   "discussed_with",
@@ -79,23 +118,57 @@ export const PRIORITY_BADGE: Record<ProjectPriority, string> = {
   Critical: "bg-danger/10 text-danger",
 };
 
-export const QUICK_TEMPLATES = [
-  "คุยงาน / ประชุม",
-  "แก้ระบบ",
-  "ทดสอบกับ user",
-  "ติดตั้งให้ user",
-  "วาง flow / เขียน spec",
-  "แก้ตาม feedback",
-  "รอ permission / blocker",
-  "Support user",
-  "Research / หาข้อมูล",
-] as const;
+/** Thai display labels for status/priority. The English values above remain the
+ *  stored DB/enum values and query-filter values — these are for display only. */
+export const WORK_LOG_STATUS_LABEL_TH: Record<WorkLogStatus, string> = {
+  Planned: "วางแผนไว้",
+  "In Progress": "กำลังดำเนินการ",
+  Done: "เสร็จแล้ว",
+  Waiting: "รอผู้เกี่ยวข้อง",
+  Blocked: "ติดปัญหา",
+  Cancelled: "ยกเลิก",
+};
+
+export const PROJECT_STATUS_LABEL_TH: Record<ProjectStatus, string> = {
+  Active: "กำลังดำเนินการ",
+  Waiting: "รอผู้เกี่ยวข้อง",
+  Completed: "เสร็จแล้ว",
+  Paused: "พักไว้",
+  Cancelled: "ยกเลิก",
+};
+
+export const PRIORITY_LABEL_TH: Record<ProjectPriority, string> = {
+  Low: "ต่ำ",
+  Medium: "ปานกลาง",
+  High: "สูง",
+  Critical: "เร่งด่วนมาก",
+};
+
+export interface QuickTemplate {
+  label: string;
+  category: WorkCategory;
+  title: string;
+  status: WorkLogStatus;
+}
+
+export const QUICK_TEMPLATES: QuickTemplate[] = [
+  { label: "คุยงาน / ประชุม", category: "Meeting", title: "คุยงาน / ประชุม", status: "Done" },
+  { label: "แก้ระบบ", category: "Coding", title: "แก้ระบบ", status: "In Progress" },
+  { label: "ทดสอบกับ user", category: "Testing", title: "ทดสอบกับ user", status: "In Progress" },
+  { label: "ติดตั้งให้ user", category: "Deployment", title: "ติดตั้งให้ user", status: "Done" },
+  { label: "วาง flow / เขียน spec", category: "Planning", title: "วาง flow / เขียน spec", status: "In Progress" },
+  { label: "แก้ตาม feedback", category: "Support", title: "แก้ตาม feedback", status: "In Progress" },
+  { label: "รอ permission / blocker", category: "Admin", title: "รอ permission / blocker", status: "Waiting" },
+  { label: "Support user", category: "Support", title: "Support user", status: "In Progress" },
+  { label: "Research / หาข้อมูล", category: "Research", title: "Research / หาข้อมูล", status: "In Progress" },
+];
 
 export const NAV_ITEMS = [
   { href: "/dashboard", label: "Dashboard" },
   { href: "/work-logs", label: "Work Logs" },
   { href: "/projects", label: "Projects" },
   { href: "/reports", label: "Reports" },
+  { href: "/tracker", label: "หลักฐานงาน" },
   { href: "/people", label: "People" },
   { href: "/settings", label: "Settings" },
 ] as const;

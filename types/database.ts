@@ -1,10 +1,17 @@
 import type {
   AttachmentType,
+  AiUsageEventType,
+  AiUsageProvider,
+  AiUsageSource,
+  AiUsageTool,
+  EvidenceType,
   ProjectPriority,
   ProjectStatus,
   RelationshipType,
   WorkCategory,
   WorkLogStatus,
+  WorkSessionSource,
+  WorkSessionStatus,
 } from "@/lib/constants/enums";
 
 export interface Project {
@@ -76,3 +83,72 @@ export interface Attachment {
   updated_at: string;
   deleted_at: string | null;
 }
+
+export interface WorkSession {
+  id: string;
+  user_id: string;
+  project_id: string | null;
+  work_log_id: string | null;
+  title: string;
+  tool: string;
+  app_name: string | null;
+  window_title: string | null;
+  repo_path: string | null;
+  branch_name: string | null;
+  started_at: string;
+  ended_at: string | null;
+  duration_minutes: number | null;
+  idle_minutes: number;
+  active_minutes: number | null;
+  status: WorkSessionStatus;
+  source: WorkSessionSource;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}
+
+export interface EvidenceItem {
+  id: string;
+  user_id: string;
+  work_session_id: string | null;
+  work_log_id: string | null;
+  type: EvidenceType;
+  title: string;
+  url: string | null;
+  content: string | null;
+  metadata: Record<string, unknown>;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}
+
+export interface AiUsageEvent {
+  id: string;
+  user_id: string;
+  work_session_id: string | null;
+  provider: AiUsageProvider;
+  tool: AiUsageTool;
+  model_name: string | null;
+  event_type: AiUsageEventType;
+  detected_text: string | null;
+  reset_at: string | null;
+  remaining_text: string | null;
+  source: AiUsageSource;
+  captured_at: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}
+
+export interface TrackerToken {
+  id: string;
+  user_id: string;
+  token_hash: string;
+  name: string;
+  created_at: string;
+  last_used_at: string | null;
+  revoked_at: string | null;
+}
+
+export type TrackerTokenSummary = Omit<TrackerToken, "token_hash">;

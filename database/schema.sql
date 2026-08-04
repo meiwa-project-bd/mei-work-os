@@ -36,6 +36,14 @@ create table if not exists projects (
 create index if not exists projects_user_id_idx on projects(user_id);
 create index if not exists projects_status_idx on projects(status);
 
+-- One active project per name per user. Lets a future Excel importer safely
+-- "find or create project by name" (upsert on this constraint) instead of
+-- creating duplicate projects on repeated imports. Soft-deleted projects are
+-- excluded so a deleted name can be reused.
+create unique index if not exists projects_user_id_name_active_idx
+  on projects(user_id, name)
+  where deleted_at is null;
+
 drop trigger if exists projects_set_updated_at on projects;
 create trigger projects_set_updated_at
   before update on projects
