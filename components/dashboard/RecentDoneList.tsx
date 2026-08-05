@@ -17,7 +17,7 @@ export function RecentDoneList({ logs }: { logs: RecentDoneRow[] }) {
           {logs.map((log) => (
             <div
               key={log.id}
-              className="flex items-start justify-between gap-3 rounded-lg border border-teal-100 bg-teal-50/55 p-3"
+              className="flex items-start justify-between gap-3 rounded-lg border border-success/25 bg-success/10 p-3"
             >
               <div className="min-w-0">
                 <p className="truncate text-sm font-semibold text-foreground">{log.title}</p>

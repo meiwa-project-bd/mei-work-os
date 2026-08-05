@@ -20,14 +20,17 @@ export function DashboardKpiCard({
 
   return (
     <div
-      className={`mei-card mei-card-hover flex h-full flex-col rounded-lg p-4 ${
-        standOut ? "border-warning/40 bg-warning/[0.05]" : ""
+      className={`mei-card mei-card-hover relative flex h-full min-h-34 flex-col overflow-hidden rounded-lg p-4 ${
+        standOut ? "border-warning/50 ring-2 ring-warning/15" : ""
       }`}
     >
-      <div className={`inline-flex h-9 w-9 items-center justify-center rounded-lg ${toneClasses.chip}`}>
+      <div className="absolute right-3 top-3 h-12 w-12 rounded-full border border-white/5 bg-white/[0.03]" />
+      <div
+        className={`relative inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 ${toneClasses.chip}`}
+      >
         <Icon className={`h-5 w-5 ${toneClasses.icon}`} />
       </div>
-      <p className="mt-3 text-2xl font-bold tracking-tight text-foreground">{value}</p>
+      <p className="relative mt-3 text-2xl font-black tracking-tight text-foreground">{value}</p>
       <p className="mt-0.5 text-xs font-semibold text-muted">{label}</p>
       <p className="mt-1 min-h-4 text-[11px] leading-tight text-muted/80">{helper ?? ""}</p>
     </div>

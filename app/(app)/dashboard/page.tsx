@@ -64,8 +64,13 @@ export default async function DashboardPage() {
   const projectOverview = buildProjectOverview(activeProjects, allLogsForStats);
 
   return (
-    <div className="space-y-6">
-      <DashboardHeader todayISO={todayISO} />
+    <div className="mei-game-dashboard space-y-6">
+      <DashboardHeader
+        todayISO={todayISO}
+        trackedMinutes={trackerSummary.trackedMinutes}
+        evidenceCount={trackerSummary.evidenceCount}
+        todayTasks={todayLogs.length}
+      />
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
         <DashboardKpiCard

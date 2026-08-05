@@ -38,6 +38,133 @@ body {
   color: var(--foreground);
 }
 
+.mei-app-shell {
+  background:
+    radial-gradient(circle at 18% 12%, rgba(244, 114, 208, 0.16) 0 1px, transparent 2px),
+    radial-gradient(circle at 78% 10%, rgba(125, 211, 252, 0.2) 0 1px, transparent 2px),
+    radial-gradient(circle at 88% 72%, rgba(250, 204, 21, 0.16) 0 1px, transparent 2px),
+    linear-gradient(180deg, #091536 0%, #10163f 48%, #172052 100%);
+}
+
+.mei-game-dashboard {
+  --background: #0a1436;
+  --surface: rgba(17, 27, 68, 0.84);
+  --foreground: #f8fbff;
+  --muted: #b9c4ef;
+  --border: rgba(195, 151, 255, 0.24);
+  --primary: #7dd3fc;
+  --primary-foreground: #071222;
+  --accent: #f472d0;
+  --success: #5eead4;
+  --warning: #fbbf24;
+  --danger: #fb7185;
+  color: var(--foreground);
+}
+
+.mei-game-dashboard .mei-card {
+  background:
+    linear-gradient(135deg, rgba(24, 35, 86, 0.92), rgba(15, 24, 62, 0.82)),
+    rgba(15, 24, 62, 0.9);
+  border-color: var(--border);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 16px 38px rgba(2, 8, 27, 0.28);
+  backdrop-filter: blur(14px);
+}
+
+.mei-game-dashboard .mei-card-hover:hover {
+  border-color: rgba(244, 114, 208, 0.48);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 18px 46px rgba(12, 18, 50, 0.36);
+}
+
+.mei-game-hero {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid rgba(244, 114, 208, 0.38);
+  background:
+    linear-gradient(90deg, rgba(9, 17, 50, 0.96) 0%, rgba(19, 28, 76, 0.88) 48%, rgba(31, 45, 95, 0.68) 100%),
+    linear-gradient(180deg, rgba(125, 211, 252, 0.16), rgba(244, 114, 208, 0.11));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 22px 54px rgba(5, 11, 35, 0.38);
+}
+
+.mei-game-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 16% 24%, rgba(255, 255, 255, 0.8) 0 1px, transparent 2px),
+    radial-gradient(circle at 48% 18%, rgba(250, 204, 21, 0.8) 0 1px, transparent 2px),
+    radial-gradient(circle at 66% 44%, rgba(255, 255, 255, 0.62) 0 1px, transparent 2px),
+    radial-gradient(circle at 86% 22%, rgba(125, 211, 252, 0.76) 0 1px, transparent 2px);
+  opacity: 0.7;
+}
+
+.mei-game-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  z-index: -1;
+  height: 42%;
+  background:
+    linear-gradient(170deg, transparent 0 52%, rgba(26, 64, 88, 0.58) 53% 70%, transparent 71%),
+    linear-gradient(150deg, transparent 0 58%, rgba(83, 72, 62, 0.45) 59% 76%, transparent 77%),
+    linear-gradient(180deg, transparent, rgba(10, 18, 44, 0.9));
+}
+
+.mei-npc-frame {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid rgba(244, 114, 208, 0.42);
+  background: rgba(8, 14, 40, 0.72);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 16px 34px rgba(3, 8, 30, 0.34);
+}
+
+.mei-npc-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 8% 54%;
+  transform: scale(1.18);
+}
+
+.mei-float {
+  animation: mei-float 5.5s ease-in-out infinite;
+}
+
+.mei-shimmer {
+  background-size: 200% 100%;
+  animation: mei-shimmer 3s ease-in-out infinite;
+}
+
+@keyframes mei-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes mei-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 ::selection {
   background: rgba(22, 48, 92, 0.16);
   color: var(--foreground);

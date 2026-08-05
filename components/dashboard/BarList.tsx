@@ -42,9 +42,9 @@ export function BarList({
                     {showPercentage && total > 0 ? ` - ${pct}%` : ""}
                   </span>
                 </div>
-                <div className="h-2 overflow-hidden rounded-full bg-background">
+                <div className="h-2 overflow-hidden rounded-full bg-[#050b20]/70">
                   <div
-                    className={`h-2 rounded-full ${barClass}`}
+                    className={`h-2 rounded-full shadow-[0_0_14px_currentColor] ${barClass}`}
                     style={{ width: `${Math.max(4, (item.value / max) * 100)}%` }}
                   />
                 </div>

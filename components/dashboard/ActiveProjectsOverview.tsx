@@ -51,7 +51,7 @@ export function ActiveProjectsOverview({ projects }: { projects: ProjectOverview
           {projects.map((project) => (
             <div
               key={project.id}
-              className="rounded-lg border border-border bg-background/60 p-3.5 transition-colors hover:bg-background"
+              className="rounded-lg border border-border bg-background/50 p-3.5 transition hover:border-primary/35 hover:bg-white/[0.06]"
             >
               <p className="truncate text-sm font-bold text-foreground">{project.name}</p>
               <div className="mt-1.5 flex flex-wrap gap-1.5">

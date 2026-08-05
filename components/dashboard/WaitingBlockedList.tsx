@@ -27,7 +27,7 @@ export function WaitingBlockedList({
       }
     >
       {logs.length === 0 ? (
-        <div className="flex items-center gap-2 rounded-lg border border-teal-100 bg-teal-50/70 px-4 py-6 text-sm font-semibold text-success">
+        <div className="flex items-center gap-2 rounded-lg border border-success/25 bg-success/10 px-4 py-6 text-sm font-semibold text-success">
           <CheckCircleIcon className="h-5 w-5 shrink-0" />
           ไม่มีงานที่รอหรือติดปัญหาในตอนนี้
         </div>
@@ -36,7 +36,7 @@ export function WaitingBlockedList({
           {logs.map((log) => {
             const age = daysBetween(log.work_date, todayISO);
             return (
-              <div key={log.id} className="rounded-lg border border-amber-200 bg-amber-50/70 p-3">
+              <div key={log.id} className="rounded-lg border border-warning/35 bg-warning/10 p-3">
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div className="min-w-0">
                     <p className="text-sm font-semibold text-foreground">{log.title}</p>
@@ -51,7 +51,7 @@ export function WaitingBlockedList({
                   </Badge>
                 </div>
                 {(log.blocker || log.next_action) && (
-                  <div className="mt-2 space-y-1 border-t border-warning/15 pt-2 text-xs">
+                  <div className="mt-2 space-y-1 border-t border-warning/20 pt-2 text-xs">
                     {log.blocker && (
                       <p className="text-danger">
                         <span className="font-semibold">ติดขัด:</span> {log.blocker}
