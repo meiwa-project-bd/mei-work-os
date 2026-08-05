@@ -46,6 +46,14 @@ body {
     linear-gradient(180deg, #091536 0%, #10163f 48%, #172052 100%);
 }
 
+.mei-dashboard-route {
+  background:
+    radial-gradient(circle at 82% 6%, rgba(125, 211, 252, 0.18) 0 1px, transparent 2px),
+    radial-gradient(circle at 46% 10%, rgba(255, 255, 255, 0.5) 0 1px, transparent 2px),
+    radial-gradient(circle at 74% 22%, rgba(250, 204, 21, 0.45) 0 1px, transparent 2px),
+    linear-gradient(180deg, #071539 0%, #13255c 54%, #25415f 100%);
+}
+
 .mei-game-dashboard {
   --background: #0a1436;
   --surface: rgba(17, 27, 68, 0.84);
@@ -61,16 +69,122 @@ body {
   color: var(--foreground);
 }
 
-.mei-game-dashboard-grid {
+.mei-dashboard-board {
   display: grid;
-  gap: 18px;
+  min-height: calc(100svh - 24px);
+  gap: 16px;
 }
 
 @media (min-width: 1280px) {
-  .mei-game-dashboard-grid {
-    grid-template-columns: 330px minmax(0, 1fr);
+  .mei-dashboard-board {
+    grid-template-columns: minmax(300px, 25vw) minmax(0, 1fr);
     align-items: start;
   }
+}
+
+.mei-dashboard-workspace {
+  display: grid;
+  min-width: 0;
+  gap: 14px;
+}
+
+.mei-dashboard-content-grid {
+  display: grid;
+  min-width: 0;
+  gap: 14px;
+}
+
+@media (min-width: 1024px) {
+  .mei-dashboard-content-grid {
+    grid-template-columns: 170px minmax(0, 1fr);
+  }
+}
+
+.mei-top-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border: 1px solid rgba(195, 151, 255, 0.32);
+  background: rgba(7, 13, 36, 0.86);
+  padding: 12px 16px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 16px 36px rgba(2, 8, 27, 0.22);
+}
+
+@media (max-width: 900px) {
+  .mei-top-hud {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+.mei-hud-action,
+.mei-reward-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #d946ef, #f472d0 54%, #f59e0b);
+  color: white;
+  font-size: 14px;
+  font-weight: 900;
+  box-shadow: 0 0 28px rgba(244, 114, 208, 0.32);
+}
+
+.mei-hud-action {
+  padding: 0 18px;
+}
+
+.mei-game-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid rgba(195, 151, 255, 0.24);
+  background: rgba(8, 16, 44, 0.74);
+  padding: 10px;
+}
+
+@media (min-width: 1024px) {
+  .mei-game-nav {
+    min-height: 690px;
+  }
+}
+
+.mei-game-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 50px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 0 12px;
+  color: rgba(219, 231, 255, 0.76);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.mei-game-nav-item-active {
+  border-color: rgba(244, 114, 208, 0.5);
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.58), rgba(244, 114, 208, 0.42));
+  color: white;
+  box-shadow: 0 0 24px rgba(244, 114, 208, 0.18);
+}
+
+.mei-game-shop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 58px;
+  border: 1px solid rgba(250, 204, 21, 0.35);
+  border-radius: 8px;
+  background: rgba(250, 204, 21, 0.08);
+  color: #fde68a;
+  font-size: 13px;
+  font-weight: 900;
 }
 
 .mei-npc-panel {
@@ -86,6 +200,13 @@ body {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
     0 20px 52px rgba(3, 8, 30, 0.38);
+}
+
+@media (max-width: 1279px) {
+  .mei-npc-panel {
+    position: relative;
+    top: auto;
+  }
 }
 
 .mei-npc-portrait {
@@ -105,6 +226,16 @@ body {
   object-fit: contain;
   object-position: center bottom;
   padding: 112px 8px 8px;
+}
+
+@media (min-width: 1280px) {
+  .mei-npc-portrait {
+    min-height: calc(100svh - 36px);
+  }
+
+  .mei-npc-portrait img {
+    min-height: calc(100svh - 36px);
+  }
 }
 
 .mei-npc-portrait::after {
@@ -163,6 +294,139 @@ body {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
     0 22px 54px rgba(5, 11, 35, 0.38);
+}
+
+.mei-mission-panel {
+  position: relative;
+  display: grid;
+  min-height: 220px;
+  overflow: hidden;
+  border: 1px solid rgba(244, 114, 208, 0.42);
+  background:
+    radial-gradient(circle at 74% 22%, rgba(250, 204, 21, 0.18), transparent 18%),
+    linear-gradient(135deg, rgba(20, 30, 78, 0.94), rgba(18, 24, 66, 0.9));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 18px 42px rgba(2, 8, 27, 0.28);
+}
+
+@media (min-width: 1024px) {
+  .mei-mission-panel {
+    grid-template-columns: minmax(0, 1fr) 290px;
+  }
+}
+
+.mei-mission-copy {
+  padding: 24px;
+}
+
+.mei-mission-assistant {
+  position: relative;
+  min-height: 220px;
+  border-left: 1px solid rgba(244, 114, 208, 0.18);
+}
+
+.mei-mission-assistant img {
+  position: absolute;
+  right: 50px;
+  bottom: -82px;
+  width: 210px;
+  max-width: none;
+}
+
+.mei-mission-bubble {
+  position: absolute;
+  right: 20px;
+  top: 22px;
+  z-index: 1;
+  max-width: 150px;
+  border: 1px solid rgba(244, 215, 255, 0.62);
+  background: #fff8fb;
+  padding: 10px 12px;
+  color: #17132b;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.mei-reward-button {
+  position: absolute;
+  bottom: 22px;
+  right: 22px;
+  z-index: 2;
+  padding: 0 24px;
+}
+
+.mei-bottom-xp {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid rgba(195, 151, 255, 0.26);
+  background: rgba(7, 13, 36, 0.84);
+  padding: 12px 16px;
+  font-size: 13px;
+}
+
+.mei-upgrade-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #db2777, #f472d0);
+  padding: 0 24px;
+  color: white;
+  font-size: 14px;
+  font-weight: 900;
+  box-shadow: 0 0 24px rgba(244, 114, 208, 0.32);
+}
+
+@media (max-width: 900px) {
+  .mei-bottom-xp {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
+
+.mei-kpi-card {
+  color: #172033;
+}
+
+.mei-game-dashboard .mei-kpi-card {
+  background: var(--kpi-bg);
+  border-color: var(--kpi-border);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.62),
+    0 16px 32px rgba(2, 8, 27, 0.16);
+}
+
+.mei-game-dashboard .mei-kpi-card p {
+  color: inherit;
+}
+
+.mei-game-dashboard .mei-kpi-card p:nth-of-type(2),
+.mei-game-dashboard .mei-kpi-card p:nth-of-type(3) {
+  color: rgba(23, 32, 51, 0.72);
+}
+
+.mei-kpi-blue {
+  --kpi-bg: linear-gradient(135deg, rgba(224, 247, 255, 0.96), rgba(191, 219, 254, 0.88));
+  --kpi-border: rgba(125, 211, 252, 0.72);
+}
+
+.mei-kpi-mint {
+  --kpi-bg: linear-gradient(135deg, rgba(220, 252, 231, 0.96), rgba(204, 251, 241, 0.88));
+  --kpi-border: rgba(94, 234, 212, 0.62);
+}
+
+.mei-kpi-amber {
+  --kpi-bg: linear-gradient(135deg, rgba(255, 247, 237, 0.98), rgba(254, 215, 170, 0.88));
+  --kpi-border: rgba(251, 191, 36, 0.62);
+}
+
+.mei-kpi-pink {
+  --kpi-bg: linear-gradient(135deg, rgba(253, 242, 248, 0.98), rgba(233, 213, 255, 0.9));
+  --kpi-border: rgba(244, 114, 208, 0.62);
 }
 
 .mei-game-hero::before {

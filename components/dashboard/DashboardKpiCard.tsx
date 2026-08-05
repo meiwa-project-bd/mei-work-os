@@ -17,10 +17,16 @@ export function DashboardKpiCard({
   standOut?: boolean;
 }) {
   const toneClasses = TONE_CLASSES[tone];
+  const gameTone = {
+    primary: "mei-kpi-blue",
+    accent: "mei-kpi-pink",
+    success: "mei-kpi-mint",
+    warning: "mei-kpi-amber",
+  }[tone];
 
   return (
     <div
-      className={`mei-card mei-card-hover relative flex h-full min-h-34 flex-col overflow-hidden rounded-lg p-4 ${
+      className={`mei-card mei-card-hover mei-kpi-card ${gameTone} relative flex h-full min-h-34 flex-col overflow-hidden rounded-lg p-4 ${
         standOut ? "border-warning/50 ring-2 ring-warning/15" : ""
       }`}
     >
