@@ -26,7 +26,7 @@ export function DashboardNpcPanel({
       </div>
 
       <div className="mei-npc-portrait">
-        <img src="/mei-npc-ui-reference.png" alt="MEI NPC ผู้ช่วยงาน" />
+        <img src="/mei-npc-character.png" alt="MEI NPC ผู้ช่วยงาน" />
       </div>
 
       <div className="relative z-10 -mt-36 space-y-3 p-4">

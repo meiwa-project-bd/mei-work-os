@@ -30,9 +30,9 @@ export function DashboardHeader({
             <div className="flex min-w-0 items-center gap-3">
               <div className="h-12 w-12 overflow-hidden rounded-full border-2 border-[#f472d0]/70 bg-[#17113e]">
                 <img
-                  src="/mei-npc-ui-reference.png"
+                  src="/mei-npc-character.png"
                   alt="MEI NPC"
-                  className="h-full w-full object-cover object-[8%_45%] scale-150"
+                  className="h-full w-full object-cover object-[50%_12%] scale-[2.2]"
                 />
               </div>
               <div className="min-w-0">
