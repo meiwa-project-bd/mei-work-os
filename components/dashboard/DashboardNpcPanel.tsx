@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { formatHoursDecimal } from "@/lib/utils/duration";
 
 export function DashboardNpcPanel({
@@ -26,10 +27,21 @@ export function DashboardNpcPanel({
       </div>
 
       <div className="mei-npc-portrait">
-        <img src="/mei-npc-character.png" alt="MEI NPC ผู้ช่วยงาน" />
+        <div className="mei-npc-aura" aria-hidden="true" />
+        <span className="mei-npc-spark npc-spark-one" aria-hidden="true">+</span>
+        <span className="mei-npc-spark npc-spark-two" aria-hidden="true">+</span>
+        <div className="mei-npc-idle">
+          <Image
+            src="/mei-npc-character.png"
+            alt="MEI NPC ผู้ช่วยงาน"
+            width={1024}
+            height={1536}
+            priority
+          />
+        </div>
       </div>
 
-      <div className="relative z-10 -mt-36 space-y-3 p-4">
+      <div className="mei-npc-stats">
         <div className="rounded-lg border border-[#f472d0]/45 bg-[#12133f]/88 p-4 shadow-[0_12px_28px_rgba(4,9,30,0.28)] backdrop-blur">
           <div className="flex items-center justify-between gap-3">
             <div>

@@ -1,12 +1,12 @@
 import { ActiveProjectsOverview } from "@/components/dashboard/ActiveProjectsOverview";
 import { BarList } from "@/components/dashboard/BarList";
 import { DashboardGameNav } from "@/components/dashboard/DashboardGameNav";
+import { DashboardActivityPanels } from "@/components/dashboard/DashboardActivityPanels";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { DashboardKpiCard } from "@/components/dashboard/DashboardKpiCard";
 import { DashboardNpcPanel } from "@/components/dashboard/DashboardNpcPanel";
 import { DashboardTopHud } from "@/components/dashboard/DashboardTopHud";
 import { RecentDoneList } from "@/components/dashboard/RecentDoneList";
-import { TodayEvidenceSummary } from "@/components/dashboard/TodayEvidenceSummary";
 import { TodayWorkList } from "@/components/dashboard/TodayWorkList";
 import { WaitingBlockedList } from "@/components/dashboard/WaitingBlockedList";
 import {
@@ -27,11 +27,10 @@ import {
 import {
   buildProjectOverview,
   computeCategoryBreakdown,
-  computeKpis,
   computeProjectHours,
   computeStatusBreakdown,
 } from "@/features/dashboard/stats";
-import { getTrackerDashboardSummary } from "@/features/tracker/queries";
+import { getTrackerPageData } from "@/features/tracker/queries";
 import { createClient } from "@/lib/supabase/server";
 import { getBangkokToday, getBangkokWeekRange } from "@/lib/utils/date";
 import { formatDurationLabel } from "@/lib/utils/duration";
@@ -47,20 +46,19 @@ export default async function DashboardPage() {
     recentDoneLogs,
     activeProjects,
     allLogsForStats,
-    trackerSummary,
+    trackerData,
   ] = await Promise.all([
     getWeekLogs(supabase, weekStart, weekEnd),
     getWaitingBlockedLogs(supabase),
     getRecentDoneLogs(supabase),
     getActiveProjects(supabase),
     getAllLogsForStats(supabase),
-    getTrackerDashboardSummary(supabase, todayISO),
+    getTrackerPageData(supabase, todayISO),
   ]);
 
-  const todayLogs = weekLogs.filter((log) => log.work_date === todayISO);
-  const activeProjectsCount = activeProjects.filter((p) => p.status === "Active").length;
+  const trackerSummary = trackerData.summary;
 
-  const kpis = computeKpis(weekLogs, todayISO, waitingBlockedLogs.length, activeProjectsCount);
+  const todayLogs = weekLogs.filter((log) => log.work_date === todayISO);
   const categoryBreakdown = computeCategoryBreakdown(weekLogs);
   const statusBreakdown = computeStatusBreakdown(weekLogs);
   const projectHours = computeProjectHours(weekLogs);
@@ -122,10 +120,13 @@ export default async function DashboardPage() {
               />
             </div>
 
-            <div className="grid grid-cols-1 gap-4 xl:grid-cols-[0.95fr_1.05fr]">
-              <TodayEvidenceSummary summary={trackerSummary} />
-              <TodayWorkList logs={todayLogs} />
-            </div>
+            <DashboardActivityPanels
+              summary={trackerSummary}
+              activeSessions={trackerData.activeSessions}
+              recentEvidence={trackerData.recentEvidence}
+            />
+
+            <TodayWorkList logs={todayLogs} />
 
             <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
               <WaitingBlockedList logs={waitingBlockedLogs} todayISO={todayISO} />

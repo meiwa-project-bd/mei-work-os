@@ -1,8 +1,8 @@
-import { formatHoursDecimal } from "@/lib/utils/duration";
+import Image from "next/image";
+import { BoltIcon, ChestIcon, CoinIcon, GearIcon, GemIcon, MailIcon } from "./icons";
 
 export function DashboardTopHud({
   todayISO,
-  trackedMinutes,
   evidenceCount,
 }: {
   todayISO: string;
@@ -18,65 +18,70 @@ export function DashboardTopHud({
 
   return (
     <header className="mei-top-hud rounded-lg">
-      <div className="flex min-w-0 items-center gap-3">
-        <div className="h-14 w-14 overflow-hidden rounded-full border-2 border-[#f472d0]/70 bg-[#17113e]">
-          <img
-            src="/mei-npc-character.png"
-            alt="MEI"
-            className="h-full w-full object-cover object-[50%_11%] scale-[2.25]"
-          />
+      <div className="mei-hud-profile">
+        <div className="mei-hud-avatar">
+          <Image src="/mei-npc-chibi-v2.png" alt="MEI" width={88} height={132} priority />
         </div>
         <div className="min-w-0">
           <div className="flex items-center gap-2">
-            <h1 className="truncate text-xl font-black text-white">MEI</h1>
-            <span className="rounded-full border border-[#facc15]/40 bg-[#facc15]/10 px-2 py-0.5 text-xs font-black text-[#fde68a]">
-              Lv. 12
-            </span>
+            <h1 className="truncate text-lg font-black text-white">MEI</h1>
+            <span className="mei-level-chip">Lv. 12</span>
           </div>
-          <p className="truncate text-xs font-semibold text-[#b9c4ef]">{dateLabel}</p>
-          <div className="mt-2 flex items-center gap-2">
-            <div className="h-2 w-28 overflow-hidden rounded-full bg-white/12">
-              <div className="h-full w-[62%] rounded-full bg-gradient-to-r from-[#d946ef] to-[#7dd3fc]" />
-            </div>
-            <span className="text-[11px] font-bold text-[#dbe7ff]">2,450 / 3,000 XP</span>
+          <p className="truncate text-[11px] font-semibold text-[#b9c4ef]">{dateLabel}</p>
+          <div className="mei-hud-xp">
+            <span><i /></span>
+            <b>2,450 / 3,000 XP</b>
           </div>
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center justify-end gap-2">
-        <HudPill label="860" sub="coins" tone="gold" />
-        <HudPill label="35" sub="gems" tone="blue" />
-        <HudPill label="5/5" sub="energy" tone="amber" />
-        <HudPill label={String(evidenceCount)} sub="proofs" tone="pink" />
-        <HudPill label={formatHoursDecimal(trackedMinutes)} sub="today" tone="blue" />
-        <a href="/work-logs" className="mei-hud-action">
-          บันทึกงาน
-        </a>
+      <div className="mei-hud-resources">
+        <HudPill icon={CoinIcon} label="860" tone="gold" />
+        <HudPill icon={GemIcon} label="35" tone="blue" />
+        <HudPill icon={BoltIcon} label="5/5" sub="เต็มแล้ว" tone="amber" />
+        <HudIconButton href="/tracker" label={`หลักฐาน ${evidenceCount} ชิ้น`} icon={ChestIcon} tone="gold" />
+        <HudIconButton href="/work-logs" label="บันทึกงาน" icon={MailIcon} tone="cream" />
+        <HudIconButton href="/settings" label="ตั้งค่า" icon={GearIcon} tone="cream" />
       </div>
     </header>
   );
 }
 
 function HudPill({
+  icon: Icon,
   label,
   sub,
   tone,
 }: {
+  icon: typeof CoinIcon;
   label: string;
-  sub: string;
-  tone: "gold" | "blue" | "amber" | "pink";
+  sub?: string;
+  tone: "gold" | "blue" | "amber";
 }) {
-  const toneClass = {
-    gold: "border-[#facc15]/35 bg-[#facc15]/10 text-[#fde68a]",
-    blue: "border-[#7dd3fc]/35 bg-[#7dd3fc]/10 text-[#e0f7ff]",
-    amber: "border-[#f59e0b]/35 bg-[#f59e0b]/10 text-[#fed7aa]",
-    pink: "border-[#f472d0]/35 bg-[#f472d0]/10 text-[#fbcfe8]",
-  }[tone];
-
   return (
-    <span className={`inline-flex h-11 items-center gap-2 rounded-full border px-3 ${toneClass}`}>
-      <span className="text-base font-black leading-none">{label}</span>
-      <span className="text-[10px] font-bold uppercase opacity-80">{sub}</span>
+    <span className={`mei-hud-pill hud-${tone}`}>
+      <Icon className="h-5 w-5" />
+      <strong>{label}</strong>
+      {sub && <small>{sub}</small>}
+      <i aria-hidden="true">+</i>
     </span>
+  );
+}
+
+function HudIconButton({
+  href,
+  label,
+  icon: Icon,
+  tone,
+}: {
+  href: string;
+  label: string;
+  icon: typeof ChestIcon;
+  tone: "gold" | "cream";
+}) {
+  return (
+    <a href={href} className={`mei-hud-icon-button hud-icon-${tone}`} aria-label={label} title={label}>
+      <Icon className="h-7 w-7" />
+    </a>
   );
 }
