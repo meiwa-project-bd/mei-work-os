@@ -25,8 +25,7 @@ export function DashboardHeader({
 
   return (
     <section className="mei-game-hero overflow-hidden rounded-lg p-4 sm:p-5 lg:p-6">
-      <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
-        <div className="flex min-w-0 flex-col gap-4">
+      <div className="flex min-w-0 flex-col gap-4">
           <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#c397ff]/24 bg-[#071222]/62 px-3 py-3">
             <div className="flex min-w-0 items-center gap-3">
               <div className="h-12 w-12 overflow-hidden rounded-full border-2 border-[#f472d0]/70 bg-[#17113e]">
@@ -53,11 +52,14 @@ export function DashboardHeader({
               <span className="rounded-full border border-[#7dd3fc]/35 bg-[#7dd3fc]/12 px-3 py-1.5">
                 {evidenceCount} proofs
               </span>
+              <span className="rounded-full border border-[#f59e0b]/35 bg-[#f59e0b]/12 px-3 py-1.5">
+                5/5 energy
+              </span>
             </div>
           </div>
 
           <div className="rounded-lg border border-[#f472d0]/30 bg-[#111b44]/78 p-4 sm:p-5">
-            <div className="flex flex-wrap items-start justify-between gap-3">
+            <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_auto] xl:items-center">
               <div>
                 <p className="text-xs font-bold uppercase text-[#facc15]">ภารกิจหลักวันนี้</p>
                 <h2 className="mt-2 text-2xl font-black tracking-tight text-white sm:text-3xl">
@@ -67,9 +69,18 @@ export function DashboardHeader({
                   MEI จะช่วยเฝ้าดูเวลา งานที่ค้าง และหลักฐาน เพื่อให้วันนี้ปิดงานได้แบบเห็นผล
                 </p>
               </div>
-              <span className="rounded-lg border border-[#7dd3fc]/35 bg-[#7dd3fc]/12 px-3 py-2 text-sm font-black text-[#e0f7ff]">
-                {progressPct}%
-              </span>
+              <div className="flex items-center gap-3">
+                <span className="rounded-lg border border-[#7dd3fc]/35 bg-[#7dd3fc]/12 px-4 py-2 text-lg font-black text-[#e0f7ff]">
+                  {progressPct}%
+                </span>
+                <a
+                  href="/work-logs"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-[#d946ef] via-[#f472d0] to-[#f59e0b] px-5 py-3 text-sm font-black text-white shadow-[0_0_28px_rgba(244,114,208,0.35)] transition hover:brightness-110"
+                >
+                  <SparkIcon className="h-4 w-4" />
+                  ดูรางวัล
+                </a>
+              </div>
             </div>
 
             <div className="mt-5">
@@ -105,31 +116,6 @@ export function DashboardHeader({
               <p className="mt-1 text-2xl font-black text-[#fde68a]">+20% XP</p>
             </div>
           </div>
-        </div>
-
-        <div className="grid gap-4 sm:grid-cols-[0.86fr_1.14fr] lg:grid-cols-1 xl:grid-cols-[0.86fr_1.14fr]">
-          <div className="mei-npc-frame mei-float rounded-lg">
-            <img src="/mei-npc-ui-reference.png" alt="MEI NPC ผู้ช่วยงาน" />
-          </div>
-          <div className="flex flex-col justify-between gap-4">
-            <div className="relative rounded-lg border border-[#f4d7ff]/45 bg-[#f8fbff] p-4 text-[#101936] shadow-[0_14px_30px_rgba(4,9,30,0.24)]">
-              <div className="absolute -left-2 top-8 h-4 w-4 rotate-45 border-b border-l border-[#f4d7ff]/45 bg-[#f8fbff]" />
-              <p className="text-sm font-bold leading-6">
-                สวัสดีค่ะ! วันนี้พร้อมลุยงานไหมคะ? โฟกัสภารกิจหลัก แล้วแจ้ง MEI ได้เลย
-              </p>
-              <p className="mt-2 text-xs font-semibold text-[#8b4d8c]">
-                อีกนิดเดียวก็รับรางวัลแล้วนะ
-              </p>
-            </div>
-            <a
-              href="/work-logs"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-[#d946ef] via-[#f472d0] to-[#f59e0b] px-5 py-3 text-sm font-black text-white shadow-[0_0_28px_rgba(244,114,208,0.35)] transition hover:brightness-110"
-            >
-              <SparkIcon className="h-4 w-4" />
-              บันทึกงานใหม่
-            </a>
-          </div>
-        </div>
       </div>
     </section>
   );
