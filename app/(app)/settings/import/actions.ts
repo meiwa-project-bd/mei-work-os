@@ -86,6 +86,11 @@ export interface CommitRowInput {
   start_time: string | null;
   end_time: string | null;
   category: string;
+  /** Only present for rows parsed from the "full" export format. */
+  status?: string;
+  blocker?: string | null;
+  next_action?: string | null;
+  result?: string | null;
 }
 
 export interface CommitResult {
@@ -172,7 +177,10 @@ export async function commitImport(rowsInput: CommitRowInput[]): Promise<CommitR
       description: row.description,
       start_time: row.start_time,
       end_time: row.end_time,
-      status: "Done",
+      status: row.status ?? "Done",
+      result: row.result ?? null,
+      blocker: row.blocker ?? null,
+      next_action: row.next_action ?? null,
       boss_visible: true,
       tags: [],
     });

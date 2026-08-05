@@ -10,6 +10,7 @@ import {
 } from "@/app/(app)/settings/import/actions";
 import type { ParsedRow } from "@/lib/import/excel";
 import { Badge } from "@/components/ui/Badge";
+import { WORK_LOG_STATUS_BADGE, WORK_LOG_STATUS_LABEL_TH } from "@/lib/constants/enums";
 
 function defaultIncluded(rows: ParsedRow[]): Set<number> {
   return new Set(
@@ -74,6 +75,10 @@ export function ImportBoard() {
         start_time: row.start_time,
         end_time: row.end_time,
         category: row.category,
+        status: row.status,
+        blocker: row.blocker,
+        next_action: row.next_action,
+        result: row.result,
       }));
 
     startCommit(async () => {
@@ -143,7 +148,8 @@ export function ImportBoard() {
         >
           <p className="text-sm font-medium text-foreground">อัปโหลดไฟล์ Excel (.xlsx)</p>
           <p className="mt-1 text-xs text-muted">
-            ต้องมีคอลัมน์: วันที่, โครงการ, รายละเอียด, เวลา
+            รองรับ 2 แบบ: คอลัมน์แบบย่อ (วันที่, โครงการ, รายละเอียด, เวลา) หรือไฟล์แบบเต็มที่มี
+            หัวข้องาน, หมวดหมู่, สถานะ, เวลาเริ่ม/สิ้นสุด ฯลฯ
           </p>
           <input
             type="file"
@@ -228,7 +234,14 @@ export function ImportBoard() {
                   </td>
                   <td className="px-3 py-3 whitespace-nowrap">{formatTime(row)}</td>
                   <td className="px-3 py-3">
-                    <Badge className="bg-background text-foreground">{row.category}</Badge>
+                    <div className="flex flex-wrap gap-1">
+                      <Badge className="bg-background text-foreground">{row.category}</Badge>
+                      {row.status && (
+                        <Badge className={WORK_LOG_STATUS_BADGE[row.status]}>
+                          {WORK_LOG_STATUS_LABEL_TH[row.status]}
+                        </Badge>
+                      )}
+                    </div>
                   </td>
                   <td className="px-3 py-3">
                     {row.errors.map((e) => (
